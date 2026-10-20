@@ -120,6 +120,53 @@ that a script or a pty bridge can talk to.
 | `mcinc/` | OLIB/WIMP class descriptions for CTRAN |
 | `docs/` | Window-server notes and screenshots |
 
+## Roadmap
+
+Ideas for future versions, roughly in order of how much is already known.
+
+### MC200 and older EPOC 2 ROMs
+
+- Fit the window to the screen at start-up (640×200 on the MC200, about
+  80×15 cells). The ROM works out the screen height at boot and passes it to
+  applications; a test build reading it is waiting for confirmation in MAME.
+- MCVT needs an EPOC 2 ROM (v2.x). The MC200's v2.12F has the same OLIB and
+  WIMP classes and method numbering as v2.60F, so one MCVT.APP should run on
+  both. EPOC 1 ROMs (v1.x) use a different object format and cannot run it.
+
+### File capture, send and receive
+
+- **Capture to file**: append everything received to a file on the MC, and
+  **send a text file** as if typed, with optional per-line delay. TERM.APP
+  offers both as plain text and is the model for the menus and file-selector
+  dialogs (the ROM has a standard "Select a file" dialog, S_.RSC resource 5).
+- **XMODEM / YMODEM**: nfsc includes an X/YMODEM implementation
+  (`xymodem.c`, GPL-2.0, so compatible with MCVT), which is the starting
+  point. TERM.APP's XMODEM, XMODEM-CRC and XMODEM-checksum options and its
+  "Receiving" and "Blocks sent" progress dialogs show how the MC presents a
+  transfer. A transfer would run as its own active object so the window stays
+  responsive.
+
+### Copy, paste and Bring
+
+- **Select and copy** text on the terminal screen with the pointer or the
+  keyboard.
+- **Paste** it back as typed input.
+- **Bring**: highlight text in another application (the word processor, for
+  example), switch to MCVT and bring it in as typed input, as native MC apps
+  do. TERM.APP has this: its Edit menu's *Link* item (Psion-B) looks like
+  Bring, so its code is the reference for the system mechanism. MCVT would
+  also offer its own selection to other apps in the same way.
+
+### Terminal
+
+- Report the new size to the host automatically after a resize, so the
+  `rsz` shell function is not needed.
+- Scrollback buffer.
+- A second screen buffer for the alternate screen, so the shell's text comes
+  back when a full-screen program exits.
+- Name the remaining WIMP classes and methods (the `wN_mM` names in
+  `mcinc/`) as their roles are confirmed.
+
 ## Credits
 
 - The VT100 parser and the character-set tables come from **nfsc** by

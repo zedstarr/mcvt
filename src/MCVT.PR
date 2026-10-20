@@ -1,0 +1,15 @@
+#system epoc img
+#set epocinit=iplib
+#model small jpi
+#abort on
+#set version=0x100F
+#set priority=0x80
+#set heapsize=0x80
+#pragma link_option(map=>on)
+#run "ctran mcvt -e\mcinc\ -x\mcinc\ -g. -c -l -s -v" no_window
+#compile mcvt.c
+#run "ecobj mcvt" no_window
+#compile o_mcvt.c
+#compile vt.c
+#pragma link(olib.lib)
+#link mcvt

@@ -1,0 +1,13 @@
+# The SIBO SDK tools run under DOS: keep CRLF line endings exactly as committed
+*.C   -text
+*.H   -text
+*.CAT -text
+*.PR  -text
+*.AFL -text
+*.ext -text
+*.g   -text
+# Binary files
+*.APP binary
+*.PIC binary
+*.RSC binary
+*.png binary

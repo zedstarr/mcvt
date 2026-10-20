@@ -1,0 +1,13 @@
+# TopSpeed / CTRAN build outputs
+*.OBJ
+*.obj
+*.EXE
+*.exe
+*.LIS
+*.MAP
+*.IMG
+src/MCVT.C
+src/MCVT.G
+# local copies of Psion software (not redistributable here)
+TERM.APP
+*.LOG

@@ -1,0 +1,496 @@
+Generated for MC400 by genext.py (reverse-engineered)
+LIBRARY olib
+CLASS root
+{
+DECLARE destroy
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS varoot root
+{
+DECLARE varoot_m1
+DECLARE varoot_m2
+DECLARE varoot_m3
+DECLARE varoot_m4
+DECLARE varoot_m5
+DECLARE varoot_m6
+DECLARE varoot_m7
+DECLARE varoot_m8
+DECLARE varoot_m9
+DECLARE varoot_m10
+DECLARE varoot_m11
+DECLARE varoot_m12
+DECLARE varoot_m13
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS vafix varoot
+{
+DECLARE vafix_m14
+DECLARE vafix_m15
+DECLARE vafix_m16
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS vaflat vafix
+{
+DECLARE vaflat_m17
+DECLARE vaflat_m18
+DECLARE vaflat_m19
+DECLARE vaflat_m20
+DECLARE vaflat_m21
+DECLARE vaflat_m22
+DECLARE vaflat_m23
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS sgbuf root
+{
+DECLARE sb_init
+DECLARE sb_point
+DECLARE sb_insert
+DECLARE sb_delete
+DECLARE sb_extract
+DECLARE sb_compress
+DECLARE sb_count
+DECLARE sb_backpoint
+DECLARE sb_allocseg
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS vaseg vafix
+{
+DECLARE vaseg_m17
+DECLARE vaseg_m18
+DECLARE vaseg_m19
+DECLARE vaseg_m20
+DECLARE vaseg_m21
+DECLARE vaseg_m22
+DECLARE vaseg_m23
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS vastr varoot
+{
+DECLARE vastr_m14
+DECLARE vastr_m15
+DECLARE vastr_m16
+DECLARE vastr_m17
+DECLARE vastr_m18
+DECLARE vastr_m19
+DECLARE vastr_m20
+DECLARE vastr_m21
+DECLARE vastr_m22
+DECLARE vastr_m23
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS vaxvar vaflat
+{
+HAS_METHOD
+}
+CLASS vaxvars vaseg
+{
+HAS_METHOD
+}
+CLASS cleanup vaflat
+{
+DECLARE cl_init
+DECLARE cl_add
+DECLARE cl_remove
+DECLARE cl_clean_item
+DECLARE cl_clean_level
+DECLARE cl_set_level
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS active root
+{
+DECLARE ao_init
+DECLARE ao_cancel
+DECLARE ao_abrun
+DECLARE ao_queue
+DECLARE ao_run
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS aidle active
+{
+HAS_METHOD
+}
+CLASS rscfile root
+{
+DECLARE rs_init
+DECLARE rs_read
+DECLARE rs_read_buf
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS system root
+{
+DECLARE sy_init
+DECLARE sy_icon_pos
+DECLARE sy_link_server
+DECLARE sy_link_paste
+DECLARE sy_exec_open
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS ipcs active
+{
+DECLARE ip_add_server
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS appman root
+{
+DECLARE am_init
+DECLARE am_start
+DECLARE am_stop
+DECLARE am_add_task
+DECLARE am_wait
+DECLARE am_load_resource
+DECLARE am_load_res_buf
+DECLARE am_rscname
+DECLARE am_notify
+DECLARE am_notifyerr
+DECLARE am_clean_up
+DECLARE am_onlyone
+DECLARE am_findimg
+DECLARE am_change_pri
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS server root
+{
+DECLARE server_m1
+DECLARE server_m2
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS linksv server
+{
+DECLARE linksv_m3
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS linkcl root
+{
+DECLARE lc_start
+DECLARE lc_get_data
+DECLARE lc_stop
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS toplip server
+{
+DECLARE toplip_m3
+DECLARE toplip_m4
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS exopl active
+{
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS cmap root
+{
+DECLARE cm_init
+DECLARE cm_insert
+DECLARE cm_rect
+DECLARE cm_enq_draw
+DECLARE cm_sense_cpos
+DECLARE cm_set_cpos
+DECLARE cm_sense_size
+DECLARE cm_point_row
+DECLARE cm_autowrap
+DECLARE cm_scrollock
+DECLARE cm_scroll
+DECLARE cm_attrib
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS voice active
+{
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS notify ipcs
+{
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS consol server
+{
+DECLARE consol_m3
+DECLARE consol_m4
+DECLARE consol_m5
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS factive active
+{
+DECLARE fa_close
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS fscan factive
+{
+DECLARE fscan_m7
+DECLARE fscan_m8
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS fnode factive
+{
+DECLARE fnode_m7
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS pnode fnode
+{
+DECLARE pnode_m8
+DECLARE pnode_m9
+HAS_METHOD
+}
+CLASS pselvar vaxvar
+{
+HAS_METHOD
+}
+CLASS psel fscan
+{
+DECLARE psel_m9
+DECLARE psel_m10
+DECLARE psel_m11
+DECLARE psel_m12
+DECLARE psel_m13
+DECLARE psel_m14
+DECLARE psel_m15
+DECLARE psel_m16
+DECLARE psel_m17
+DECLARE psel_m18
+DECLARE psel_m19
+DECLARE psel_m20
+DECLARE psel_m21
+DECLARE psel_m22
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS fcasy factive
+{
+DECLARE fcasy_m7
+DECLARE fcasy_m8
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS fcsync fcasy
+{
+HAS_METHOD
+}
+CLASS fmmk factive
+{
+HAS_METHOD
+}
+CLASS fmsrc fcasy
+{
+DECLARE fmsrc_m9
+HAS_METHOD
+}
+CLASS fmtarg fcasy
+{
+DECLARE fmtarg_m9
+HAS_METHOD
+}
+CLASS fmfmt factive
+{
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS fmscan fscan
+{
+DECLARE fmscan_m9
+DECLARE fmscan_m10
+DECLARE fmscan_m11
+DECLARE fmscan_m12
+HAS_METHOD
+}
+CLASS fman root
+{
+DECLARE fman_m1
+DECLARE fman_m2
+DECLARE fman_m3
+DECLARE fman_m4
+DECLARE fman_m5
+DECLARE fman_m6
+DECLARE fman_m7
+DECLARE fman_m8
+DECLARE fman_m9
+DECLARE fman_m10
+DECLARE fman_m11
+DECLARE fman_m12
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS locs root
+{
+DECLARE locs_m1
+DECLARE locs_m2
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS time root
+{
+DECLARE to_set
+DECLARE to_sense
+DECLARE to_add_years
+DECLARE to_add_months
+DECLARE to_add_days
+DECLARE to_add_secs
+DECLARE to_set_format
+DECLARE to_sense_format
+DECLARE to_get_sysdat
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS timer active
+{
+DECLARE tm_qabsolute
+HAS_METHOD
+}
+CLASS buzsnd timer
+{
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS alarr vaxvar
+{
+DECLARE va_confirm
+DECLARE va_cancel
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS animator timer
+{
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS bfile root
+{
+DECLARE fi_close
+DECLARE fi_read
+DECLARE fl_set_buf_len
+DECLARE fl_sense_data
+DECLARE fi_open
+DECLARE fl_rewind
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS tlvfile bfile
+{
+DECLARE fl_write_rec
+DECLARE fl_delrec
+DECLARE fl_count
+DECLARE fl_read_by_type
+DECLARE fl_set_rec
+DECLARE fl_sense_rec
+DECLARE fl_replace
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS tlvdata root
+{
+DECLARE tlvdata_m1
+DECLARE tlvdata_m2
+DECLARE tlvdata_m3
+DECLARE tlvdata_m4
+DECLARE tlvdata_m5
+DECLARE tlvdata_m6
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS serfile tlvdata
+{
+DECLARE serfile_m7
+DECLARE serfile_m8
+DECLARE serfile_m9
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS print active
+{
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS serial active
+{
+DECLARE sr_write
+DECLARE sr_test
+DECLARE sr_set
+DECLARE sr_sense
+DECLARE sr_flush
+DECLARE sr_control
+DECLARE sr_enquire
+DECLARE sr_grab
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS eproot root
+{
+DECLARE eproot_m1
+DECLARE eproot_m2
+DECLARE eproot_m3
+DECLARE eproot_m4
+DECLARE eproot_m5
+DECLARE eproot_m6
+DECLARE eproot_m7
+DECLARE eproot_m8
+DECLARE eproot_m9
+DECLARE eproot_m10
+DECLARE eproot_m11
+DECLARE eproot_m12
+DECLARE eproot_m13
+DECLARE eproot_m14
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS epflat eproot
+{
+DECLARE epflat_m15
+DECLARE epflat_m16
+DECLARE epflat_m17
+DECLARE epflat_m18
+DECLARE epflat_m19
+DECLARE epflat_m20
+DECLARE epflat_m21
+DECLARE epflat_m22
+DECLARE epflat_m23
+DECLARE epflat_m24
+DECLARE epflat_m25
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS epseg eproot
+{
+DECLARE epseg_m15
+DECLARE epseg_m16
+DECLARE epseg_m17
+DECLARE epseg_m18
+DECLARE epseg_m19
+DECLARE epseg_m20
+DECLARE epseg_m21
+DECLARE epseg_m22
+DECLARE epseg_m23
+HAS_METHOD
+HAS_PROPERTY
+}
+CLASS vtab vaflat
+{
+DECLARE vt_gaptonext
+DECLARE vt_set_colwid
+DECLARE vt_setintv
+DECLARE vt_set
+DECLARE vt_strip
+HAS_METHOD
+HAS_PROPERTY
+}

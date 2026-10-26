@@ -30,7 +30,7 @@ for this project.
 - **Serial**: TTY:A or TTY:B, 50–19200 baud, XON/XOFF or RTS/CTS
   handshaking, set with the MC's built-in *Serial options* dialog.
 - **Terminal options**: local echo, Backspace sends DEL or Ctrl-H,
-  auto wrap, UTF-8.
+  auto wrap, UTF-8, tell the host the new size after a resize.
 - **Settings saved** in `M:\MCVT.INI`.
 
 ## Installing
@@ -70,8 +70,13 @@ Ctrl+letter sends the control code.
 
   or use RTS/CTS if your cable has the lines (tick RTS/CTS in MCVT and run
   `stty -F /dev/ttyUSB0 crtscts`).
-- A serial line cannot tell the host when the window is resized. After
-  resizing or maximising, tell it with:
+- A serial line cannot tell the host when the window is resized. Tick
+  **Send stty to host on resize** in Terminal options and MCVT types
+  ` stty rows R cols C` at the host after each resize (with a leading space,
+  so bash leaves it out of the history if `HISTCONTROL` includes
+  `ignorespace`). Use it at a shell prompt: while a full-screen program such
+  as `vi` or `top` has the screen, the command is held back until the
+  program exits. Without the option, tell the host yourself with:
 
   ```sh
   rsz() { printf '\0337\033[r\033[999;999H\033[6n\0338'; IFS='[;' read -sdR _ r c; stty rows $r cols $c; echo "${c}x${r}"; }
@@ -159,8 +164,6 @@ different object format and cannot run MCVT.
 
 ### Terminal
 
-- Report the new size to the host automatically after a resize, so the
-  `rsz` shell function is not needed.
 - Scrollback buffer.
 - A second screen buffer for the alternate screen, so the shell's text comes
   back when a full-screen program exits.

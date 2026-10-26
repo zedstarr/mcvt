@@ -1,7 +1,14 @@
 # Changelog
 
-## Unreleased
+## 1.1 — 2026-10-26
 
+- XON is sent when the serial port is opened, at start-up and after changing
+  the serial settings, so a host left stopped by an earlier XOFF carries on.
+  Found with the TLA+ model of the serial path (`spec/serial_reconf.cfg`).
+- New Terminal option, **Send stty to host on resize**: after the window
+  changes size MCVT types ` stty rows R cols C` at the host. While a
+  full-screen program is using the alternate screen the command waits until
+  it exits. Off by default.
 - Font search stops after the four fonts that exist (system, SMALL, BIG,
   MONO). Asking about a missing font kills the process on ROM v2.12F; the
   font chosen on the MC400 is unchanged.

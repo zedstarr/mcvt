@@ -58,7 +58,7 @@ typedef struct
     UBYTE bsctlh;             /* Backspace sends ^H */
     UBYTE wrap;               /* auto wrap */
     UBYTE utf8;               /* UTF-8, else ISO 8859-1 */
-    UBYTE spare;
+    UBYTE sizerep;            /* after a resize, type stty rows/cols to the host */
     } SETTINGS;
 
 LOCAL_D SETTINGS set;
@@ -150,6 +150,33 @@ GLDEF_C VOID ser_send(UBYTE *buf, INT len)
         p_write(serh, buf, len);
     }
 
+/* A serial line cannot signal a resize (no SIGWINCH), so if the option is
+ * on, type " stty rows R cols C" at the host after the window changes size.
+ * The leading space keeps it out of bash history (HISTCONTROL=ignorespace).
+ * While a full-screen program has the alternate screen the report waits
+ * until it exits, so it is not typed into the program. */
+LOCAL_D INT rep_cols, rep_rows, rep_pending;
+
+LOCAL_C VOID sizereport(VOID)
+    {
+    TEXT b[40];
+    INT n;
+    if (!set.sizerep || !serh) return;
+    if (vt_cols == rep_cols && vt_rows == rep_rows) { rep_pending = 0; return; }
+    if (vt_altscr) { rep_pending = 1; return; }
+    rep_pending = 0;
+    rep_cols = vt_cols; rep_rows = vt_rows;
+    p_scpy(b, " stty rows ");
+    n = p_slen(b);
+    n += putnum(b + n, vt_rows);
+    b[n] = 0;
+    p_scat(b, " cols ");
+    n = p_slen(b);
+    n += putnum(b + n, vt_cols);
+    b[n++] = '\r';
+    ser_send((UBYTE *)b, n);
+    }
+
 LOCAL_C WORD *serstat(VOID)
     {
     return((WORD *)((UBYTE *)serobj + 0x0c));         /* active.stat */
@@ -190,6 +217,10 @@ LOCAL_C VOID ser_open(VOID)
     dlog(portname, openerr, 0);
     if (openerr < 0) { serh = NULL; return; }
     r = p_iow(serh, P_FSET, &set.ser);
+    /* release the host: if XOFF was in force when the port was last closed
+     * (or a previous session left it stopped), nothing else would send XON */
+    if (r >= 0 && (set.ser.hand & P_SEND_XOFF))
+        p_write(serh, &set.ser.xon, 1);
     dlog("P_FSET", r, 0);
     }
 
@@ -295,6 +326,7 @@ GLDEF_C VOID main(VOID)
     ser_open();
     am = p_new(CAT_MCVT_WIMP, C_W69);
     r = p_send5(am, O_AM_INIT, 0x801F, p_getlibh(CAT_MCVT_MCVT), 0);
+    rep_cols = vt_cols; rep_rows = vt_rows;     /* report only changes */
     dlog("am_init ret", r, 0);
     if (r == 0)
         {
@@ -326,6 +358,7 @@ METHOD INT mcvtser_ao_run(PR_MCVTSER *self)
             if (p_iow(serh, P_FREAD, &rxbuf[1], &more) < 0) more = 0;
             }
         vt_write(rxbuf, more + 1);
+        if (rep_pending && !vt_altscr) sizereport();
         }
     ser_queue();
     return(1);
@@ -407,7 +440,10 @@ METHOD VOID mcvtwin_w18_m44(PR_MCVTWIN *self, INT *rect)
     w = *(INT *)((UBYTE *)self + 6);
     h = *(INT *)((UBYTE *)self + 8);
     if (w > 0 && h > 0 && vt_wid)
+        {
         vt_resize((w - 4) / vt_cw, (h - 4) / vt_ch);
+        sizereport();
+        }
     }
 
 METHOD VOID mcvtwin_w14_m33(PR_MCVTWIN *self, UWORD *st)
@@ -495,6 +531,7 @@ METHOD VOID mcvtcom_mcvtcom_term(PR_MCVTCOM *self)
 #define D_BS 4
 #define D_WRAP 5
 #define D_UTF8 6
+#define D_SIZEREP 7
 
 LOCAL_C VOID cbset(VOID *dlg, INT id, INT on)
     {
@@ -519,6 +556,7 @@ METHOD VOID mcvtdlg_w31_m62(PR_MCVTDLG *self)
     cbset(self, D_BS, set.bsctlh);
     cbset(self, D_WRAP, set.wrap);
     cbset(self, D_UTF8, set.utf8);
+    cbset(self, D_SIZEREP, set.sizerep);
     }
 
 /* control activated: 1 = CANCEL, 2 = ENTER (both close it), else a control id */
@@ -534,6 +572,7 @@ METHOD VOID mcvtdlg_w31_m63(PR_MCVTDLG *self, INT button)
             vt_puts(wrap ? "\033[?7h" : "\033[?7l");
         set.wrap = (UBYTE)wrap;
         set.utf8 = (UBYTE)cbget(self, D_UTF8);
+        set.sizerep = (UBYTE)cbget(self, D_SIZEREP);
         applyterm();
         saveset();
         }

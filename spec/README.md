@@ -72,7 +72,7 @@ from.
    driver state, and the host is never sent XON, so it stays stopped.
    `ser_open` sends nothing, and the same applies at start-up if a previous
    session left the host stopped. Fix: send XON (0x11) after `ser_open` when
-   XON/XOFF is on.
+   XON/XOFF is on. **Fixed in MCVT 1.1.**
 2. **Bytes lost on reconfigure** (`serial_drop`). Changing settings drops what
    is in the driver buffer and any completed read not yet processed. Harmless
    in practice (the user is changing the line), but worth knowing; it could be

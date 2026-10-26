@@ -118,20 +118,20 @@ that a script or a pty bridge can talk to.
 | `src/mkrsc.py` | Builds `MCVT.RSC` (title, menus, Terminal options dialog) |
 | `src/mkicon.py` | Builds `MCVT.PIC` |
 | `mcinc/` | OLIB/WIMP class descriptions for CTRAN |
-| `docs/` | Window-server notes and screenshots |
+| `docs/` | Window-server notes, MC200 investigation, screenshots |
+| `spec/` | TLA+ models of the serial path and screen updating, with TLC configs |
 
 ## Roadmap
 
 Ideas for future versions, roughly in order of how much is already known.
 
-### MC200 and older EPOC 2 ROMs
+### MC200 and older EPOC 2 ROMs (parked)
 
-- Fit the window to the screen at start-up (640×200 on the MC200, about
-  80×15 cells). The ROM works out the screen height at boot and passes it to
-  applications; a test build reading it is waiting for confirmation in MAME.
-- MCVT needs an EPOC 2 ROM (v2.x). The MC200's v2.12F has the same OLIB and
-  WIMP classes and method numbering as v2.60F, so one MCVT.APP should run on
-  both. EPOC 1 ROMs (v1.x) use a different object format and cannot run it.
+MCVT does not yet run on the MC200's ROM v2.12F: it draws its window and is
+then ended silently by ROM code. One cause (the font search) was found and
+fixed; the rest is unresolved. Findings, the ROM differences seen and next
+steps are in [docs/mc200.md](docs/mc200.md). EPOC 1 ROMs (v1.x) use a
+different object format and cannot run MCVT.
 
 ### File capture, send and receive
 

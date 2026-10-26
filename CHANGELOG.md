@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Font search stops after the four fonts that exist (system, SMALL, BIG,
+  MONO). Asking about a missing font kills the process on ROM v2.12F; the
+  font chosen on the MC400 is unchanged.
+- `spec/`: TLA+ models of the serial input path and of screen updating
+  (deferred scrolling, XOR cursor, covered windows), checked with TLC.
+- `docs/mc200.md`: notes from trying MCVT on the MC200 (ROM v2.12F), parked.
+
 ## 1.0 — 2026-10-19
 
 First release.

@@ -261,7 +261,10 @@ LOCAL_C VOID choosefont(VOID)
     INT i, w, best = -1, bestscore = -1, score, mono;
     UINT h;
     G_FONT_INFO f, fi;
-    for (i = 0; i < 8; i++)
+    /* the system font and the three ROM fonts (SMALL, BIG, MONO). Asking
+     * about a font that does not exist returns an error on v2.60F but kills
+     * the process on v2.12F (MC200), so go no further. */
+    for (i = 0; i < 4; i++)
         {
         h = (i == 0) ? WS_FONT_SYSTEM : WS_FONT_BASE + i - 1;
         probe_h = h; probe_fi = &f;
